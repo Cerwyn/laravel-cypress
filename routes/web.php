@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('_testing')
+    ->middleware(['testing'])
+    ->group(__DIR__ . '/_testing.php');
